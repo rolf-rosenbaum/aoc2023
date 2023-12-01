@@ -1,7 +1,9 @@
 import java.io.File
 
-fun main(args: Array<String>) {
-    args.forEach {
+fun main() {
+    (2..25).map {
+        it.toString().padStart(2, '0')
+    }.forEach {
 
         val name = "Day$it.txt"
         val testName = "Day${it}_test.txt"
