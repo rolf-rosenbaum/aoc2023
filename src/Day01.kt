@@ -2,6 +2,19 @@ fun main() {
     val input = readInput("Day01")
     val testInput = readInput("Day01_test")
 
+    fun part1(input: List<String>): Int {
+        return input.map { line ->
+            line.filter { it.isDigit() }
+        }.map {
+            it.first().toString() + it.last().toString()
+        }.sumOf {it.toInt()}
+
+    }
+
+    fun part2(input: List<String>): Int {
+        return input.sumOf{it.firstAndLastNumberAdded()}
+    }
+
     check(part1(testInput) == 220)
     part1(input).println()
 
@@ -9,18 +22,6 @@ fun main() {
     part2(input).println()
 }
 
-fun part1(input: List<String>): Int {
-    return input.map { line ->
-        line.filter { it.isDigit() }
-    }.map {
-        it.first().toString() + it.last().toString()
-    }.sumOf {it.toInt()}
-
-}
-
-fun part2(input: List<String>): Int {
-    return input.sumOf{it.firstAndLastNumberAdded()}
-}
 fun String.firstAndLastNumberAdded(): Int {
     val firstNumberWord = this.findAnyOf(digitWords.keys)
     val lastNumberWord = this.findLastAnyOf(digitWords.keys)
