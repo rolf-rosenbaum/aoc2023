@@ -30,6 +30,10 @@ data class Point(val x: Int, val y: Int) {
         if (includeCenter) listOf(Point(x, y + 1), Point(x + 1, y), this, Point(x, y - 1), Point(x - 1, y))
         else listOf(Point(x, y + 1), Point(x + 1, y), Point(x, y - 1), Point(x - 1, y))
 
+    /**
+     * includes diagonal neighbors
+     */
+
     fun allNeighbours(): Set<Point> =
         setOf(
             Point(x - 1, y - 1),
@@ -41,6 +45,9 @@ data class Point(val x: Int, val y: Int) {
             Point(x, y + 1),
             Point(x + 1, y + 1)
         )
+
+    fun rightOf() = Point(x - 1, y)
+    fun leftOf() = Point(x + 1, y)
 
     fun distanceTo(other: Point) = abs(x - other.x) + abs(y - other.y)
     operator fun plus(other: Point) = Point(x + other.x, y + other.y)
