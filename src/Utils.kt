@@ -46,8 +46,8 @@ data class Point(val x: Int, val y: Int) {
             Point(x + 1, y + 1)
         )
 
-    fun rightOf() = Point(x - 1, y)
-    fun leftOf() = Point(x + 1, y)
+    fun leftOf() = Point(x - 1, y)
+    fun rightOf() = Point(x + 1, y)
 
     fun distanceTo(other: Point) = abs(x - other.x) + abs(y - other.y)
     operator fun plus(other: Point) = Point(x + other.x, y + other.y)

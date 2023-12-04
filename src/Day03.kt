@@ -54,23 +54,23 @@ fun Point.toNumber(machine: Machine): Pair<Int, List<Point>> {
 
 private fun findNumber(start: Point, machine: Machine): Pair<Int, List<Point>> {
     val usedDigits = mutableListOf(start)
-    var left = start.leftOf()
+    var left = start.rightOf()
     val number = mutableListOf<Char>()
     number.add(machine[start]!!)
     while (machine[left]?.isDigit() == true) {
         number.add(machine[left]!!)
         usedDigits.add(left)
-        left = left.leftOf()
+        left = left.rightOf()
     }
     return number.joinToString("").toInt() to usedDigits
 }
 
 private fun Point.startOfNumber(machine: Machine): Point {
-    var start = rightOf()
+    var start = leftOf()
     while (machine[start]?.isDigit() == true) {
-        start = start.rightOf()
+        start = start.leftOf()
     }
-    return start.leftOf()
+    return start.rightOf()
 }
 
 fun Point.adjacentNumbers(machine: Machine): List<Int> {
