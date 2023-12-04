@@ -3,22 +3,21 @@ import kotlin.math.pow
 fun main() {
     fun part1(input: List<String>): Int {
         val cards = input.map(String::toCard)
-        return cards.sumOf { 2.0.pow(it.countWinningNumbers().toDouble() - 1.0).toInt() }
+        return cards.sumOf { 2.0.pow(it.countMyWinners().toDouble() - 1.0).toInt() }
     }
 
     fun part2(input: List<String>): Int {
         val cards = input.map(String::toCard)
-        val cardsCount = cards.associate { it.id to 1 }.toMutableMap()
+        val cardsCountById = cards.associate { it.id to 1 }.toMutableMap()
         cards.forEach { card ->
-            val winning = card.countWinningNumbers()
-            ((card.id + 1)..(card.id + winning)).forEach { id ->
-                val count = cardsCount[card.id]
+            ((card.id + 1)..(card.id + card.countMyWinners())).forEach { id ->
+                val count = cardsCountById[card.id]
                 if (count != null) {
-                    cardsCount[id] = cardsCount[id]!! + count
+                    cardsCountById[id] = cardsCountById[id]!! + count
                 }
             }
         }
-        return cardsCount.values.sum()
+        return cardsCountById.values.sum()
     }
 
     // test if implementation meets criteria from the description, like:
@@ -45,5 +44,5 @@ data class Card(
     val winningNumbers: List<Int>,
     val myNumbers: List<Int>
 ) {
-    fun countWinningNumbers(): Int = myNumbers.intersect(winningNumbers.toSet()).size
+    fun countMyWinners(): Int = myNumbers.intersect(winningNumbers.toSet()).size
 }
