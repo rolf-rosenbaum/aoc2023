@@ -1,7 +1,5 @@
 import kotlin.math.pow
 
-typealias Pile = Map<Int, MutableList<Card>>
-
 fun main() {
     fun part1(input: List<String>): Int {
         val cards = input.map(String::toCard)
