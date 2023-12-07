@@ -5,10 +5,9 @@ fun main() {
     fun part1(input: List<String>): Int {
         return input.map { line ->
             line.filter { it.isDigit() }
-        }.map {
-            it.first().toString() + it.last().toString()
-        }.sumOf {it.toInt()}
-
+        }.sumOf {
+            "${it.first()}${it.last()}".toInt()
+        }
     }
 
     fun part2(input: List<String>): Int {
