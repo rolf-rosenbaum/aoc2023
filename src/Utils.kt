@@ -78,3 +78,11 @@ fun List<Int>.findPattern(startIndex: Int = 1): Pair<Int, Int> {
     }
     error("no pattern")
 }
+
+fun Long.primeFactors(): List<Long> = mutableListOf<Long>().let { f ->
+    (2..this / 2).filter { this % it == 0L }
+        .let {
+            f.addAll(it)
+            if (f.isEmpty()) listOf(this) else f
+        }
+}
