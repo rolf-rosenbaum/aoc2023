@@ -4,7 +4,7 @@ fun main() {
     val directions = Directions(input.first())
     val nodes = input.drop(2).map(String::toNode).associateBy(Node::name)
 
-    fun nodeSequence(start: Node) = generateSequence(start) {
+    fun Node.nodeSequence() = generateSequence(this) {
         when (directions.next()) {
             'L' -> nodes[it.left]!!
             'R' -> nodes[it.right]!!
@@ -12,19 +12,20 @@ fun main() {
         }
     }
 
-    fun Node.pathLengthUntil(stopCondition: (Node) -> Boolean): Int = nodeSequence(this).takeWhile { !stopCondition(it) }.count()
+    fun Node.pathLengthUntil(stopCondition: (Node) -> Boolean): Long =
+        nodeSequence()
+            .takeWhile { !stopCondition(it) }.count().toLong()
+            .also { directions.reset() }
 
-    fun part1(): Int = nodes["AAA"]!!.pathLengthUntil{ it == nodes["ZZZ"] }
+    fun part1(): Long = nodes["AAA"]!!.pathLengthUntil { it == nodes["ZZZ"] }
 
     fun part2(): Long = nodes.filterKeys {
         it.endsWith("A")
     }.values
         .map { node ->
-            directions.reset()
             node.pathLengthUntil { it.name.endsWith("Z") }
-        }.flatMap {
-            it.toLong().primeFactors()
-        }.distinct()
+        }.flatMap(Long::primeFactors)
+        .distinct()
         .reduce(Long::times)
 
     part1().println()
@@ -39,10 +40,7 @@ private data class Directions(
         if (index == directions.length) reset()
         return directions[index++]
     }
-
-    fun reset() {
-        index = 0
-    }
+    fun reset() { index = 0 }
 }
 
 private data class Node(
