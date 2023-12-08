@@ -26,17 +26,17 @@ data class PokerHand(
     private val countJokers: Int get() = cards.count { it == 1 }
 
     private val rank: Int
-        get() = if (hasFiveOfAKind(withJokers)) 6
-        else
-            if (hasFourOfAKind(withJokers)) 5 else
-                if (hasFullHouse(withJokers)) 4 else
-                    if (hasThreeOfAKind(withJokers)) 3 else
-                        if (hasTwoPair(withJokers)  ) 2 else
-                            if (hasPair(withJokers)) 1 else 0
+        get() =
+            if (hasFiveOfAKind(withJokers)) 6 else
+                if (hasFourOfAKind(withJokers)) 5 else
+                    if (hasFullHouse(withJokers)) 4 else
+                        if (hasThreeOfAKind(withJokers)) 3 else
+                            if (hasTwoPair(withJokers)) 2 else
+                                if (hasPair(withJokers)) 1 else 0
 
-    private fun hasFiveOfAKind(jokers: Boolean = false) = if(jokers) fiveOfAKindWithJokers() else cards.count { it == cards.first() } == 5
-    private fun hasFourOfAKind(jokers: Boolean = false) = if(jokers) fourOfAKindWithJokers() else cards.any { c -> cards.count { c == it } == 4 }
-    private fun hasFullHouse(jokers: Boolean = false) = if(jokers) fullHouseWithJokers() else hasThreeOfAKind() && hasPair()
+    private fun hasFiveOfAKind(jokers: Boolean = false) = if (jokers) fiveOfAKindWithJokers() else cards.count { it == cards.first() } == 5
+    private fun hasFourOfAKind(jokers: Boolean = false) = if (jokers) fourOfAKindWithJokers() else cards.any { c -> cards.count { c == it } == 4 }
+    private fun hasFullHouse(jokers: Boolean = false) = if (jokers) fullHouseWithJokers() else hasThreeOfAKind() && hasPair()
     private fun hasThreeOfAKind(jokers: Boolean = false) = if (jokers) threeOfAKindWithJokers() else cards.any { c -> cards.count { c == it } == 3 }
     private fun hasTwoPair(jokers: Boolean = false) = if (jokers) twoPairWithJokers() else !hasThreeOfAKind() && cards.distinct().size == 3
     private fun hasPair(jokers: Boolean = false) = if (jokers) pairWithJokers() else cards.any { c -> cards.count { c == it } == 2 }
@@ -57,7 +57,7 @@ data class PokerHand(
     private fun compareCards(other: PokerHand): Int {
         return cards.mapIndexed { i, card ->
             card.compareTo(other.cards[i])
-        }.first { it != 0 }
+        }.firstOrNull { it != 0 } ?: 0
     }
 }
 
