@@ -30,10 +30,10 @@ fun main() {
     val testInput = readInput("Day03_test")
     check(part1(testInput) == 4361)
 
-    part1(input).println()
+    part1(input).writeToConsole()
 
     check(part2(testInput) == 467835)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 fun Char.isSymbol() = !this.isDigit() && this != '.'

@@ -20,8 +20,8 @@ fun main() {
     // test if implementation meets criteria from the description, like:
     check(part1(testRaces) == 288)
 
-    part1(races).println()
-    part2().println()
+    part1(races).writeToConsole()
+    part2().writeToConsole()
 }
 
 private fun Pair<Int, Int>.waysToWin(): Int {

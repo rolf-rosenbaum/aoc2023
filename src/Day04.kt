@@ -24,10 +24,10 @@ fun main() {
     val input = readInput("Day04")
     val testInput = readInput("Day04_test")
     check(part1(testInput) == 13)
-    part1(input).println()
+    part1(input).writeToConsole()
 
     check(part2(testInput) == 30)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 fun String.toCard(): Card {

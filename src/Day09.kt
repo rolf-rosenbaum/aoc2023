@@ -13,10 +13,10 @@ fun main() {
     val testInput = readInput("Day09_test")
 
     check(part1(testInput) == 114)
-    part1(input).println()
+    part1(input).writeToConsole()
 
     check(part2(testInput) == 2)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 private fun List<List<Int>>.sumOfNextElements() =

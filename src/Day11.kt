@@ -10,10 +10,10 @@ fun main() {
     val input = readInput("Day11")
 
     check(part1(testInput) == 374L)
-    part1(input).println()
+    part1(input).writeToConsole()
 
     check(part2(testInput) == 82000210L)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 fun Space.sumOfDistances(): Long {

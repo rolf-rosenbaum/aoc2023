@@ -7,9 +7,9 @@ fun main() {
     val testInput = readInput("Day10_test")
     check(part1(testInput) == 80)
 
-    part1(input).println()
+    part1(input).writeToConsole()
     check(part2(testInput) == 10)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 private fun Maze.hasConnectionBetween(a: Point, b: Point): Boolean {

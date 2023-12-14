@@ -20,7 +20,7 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
 /**
  * The cleaner shorthand for printing output.
  */
-fun Any?.println() = println(this)
+fun Any?.writeToConsole() = println(this)
 
 fun <T> List<T>.second() = this[1]
 fun <T, R> Pair<T, R>.reverse() = second to first
@@ -68,7 +68,7 @@ fun IntRange.union(other: IntRange): IntRange? {
     else null
 }
 
-fun List<Int>.findPattern(startIndex: Int = 1): Pair<Int, Int> {
+fun List<Int>.findPattern(minWindow: Int = 1, startIndex: Int = 1): Pair<Int, Int> {
     (startIndex..size / 2).forEach { windowSize ->
         print("$windowSize\r")
         val tmp = this.windowed(windowSize)
@@ -89,3 +89,8 @@ fun Long.primeFactors(): List<Long> = mutableListOf<Long>().let { f ->
             if (f.isEmpty()) listOf(this) else f
         }
 }
+
+fun Collection<Point>.maxX() = maxOf{it.x}
+fun Collection<Point>.maxY() = maxOf{it.y}
+fun Collection<Point>.minX() = minOf{it.x}
+fun Collection<Point>.minY() = minOf{it.y}

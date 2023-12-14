@@ -13,17 +13,17 @@ fun main() {
     // test if implementation meets criteria from the description, like:
     val input = readInput("Day12")
     val testInput = readInput("Day12_test")
-    part1(testInput).println()
+    part1(testInput).writeToConsole()
     check(part1(testInput) == 21L)
 
     val now = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
-    part1(input).println()
+    part1(input).writeToConsole()
     val afterPart1 = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
     println("Duration: ${afterPart1 - now}s")
 
     check(part2(testInput) == 525152L)
     println("check for part2 done")
-    part2(input).println()
+    part2(input).writeToConsole()
     val afterPart2 = LocalDateTime.now().toEpochSecond(ZoneOffset.UTC)
     println("Duration: ${afterPart2 - afterPart1}s")
 }

@@ -25,7 +25,7 @@ fun main() {
 //    part1(input).println()
 
 //    check(part2(testInput) == 46L)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 fun String.toRanges(): Pair<LongRange, LongRange> {

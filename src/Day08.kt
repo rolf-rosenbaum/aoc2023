@@ -28,8 +28,8 @@ fun main() {
         .distinct()
         .reduce(Long::times)
 
-    part1().println()
-    part2().println()
+    part1().writeToConsole()
+    part2().writeToConsole()
 }
 
 private data class Directions(

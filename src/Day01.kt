@@ -15,10 +15,10 @@ fun main() {
     }
 
     check(part1(testInput) == 220)
-    part1(input).println()
+    part1(input).writeToConsole()
 
     check(part2(testInput) == 281)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 fun String.firstAndLastNumberAdded(): Int {

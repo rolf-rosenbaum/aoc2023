@@ -11,10 +11,10 @@ fun main() {
     val testInput = readInput("Day07_test")
     val input = readInput("Day07")
     check(part1(testInput) == 6440)
-    part1(input).println()
+    part1(input).writeToConsole()
 
     check(part2(testInput) == 5905)
-    part2(input).println()
+    part2(input).writeToConsole()
 }
 
 data class PokerHand(
