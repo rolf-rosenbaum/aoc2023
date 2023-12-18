@@ -4,7 +4,7 @@ import Direction.South
 import Direction.West
 import kotlin.math.max
 
-typealias Vector = Point
+
 
 fun main() {
     fun part1(input: List<String>): Int {
@@ -71,12 +71,6 @@ fun Map<Point, Char>.sendLightBeam(start: LightBeam = LightBeam(Point(0, 0), Eas
     return touched.map { it.position }.toSet()
 }
 
-enum class Direction(val vector: Vector) {
-    North(Vector(0, -1)),
-    East(Vector(1, 0)),
-    South(Vector(0, 1)),
-    West(Vector(-1, 0)),
-}
 
 data class LightBeam(
     val position: Point,

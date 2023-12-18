@@ -4,6 +4,9 @@ import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.math.abs
 
+
+typealias Vector = Point
+
 /**
  * Reads lines from the given input txt file.
  */
@@ -94,3 +97,17 @@ fun Collection<Point>.maxX() = maxOf{it.x}
 fun Collection<Point>.maxY() = maxOf{it.y}
 fun Collection<Point>.minX() = minOf{it.x}
 fun Collection<Point>.minY() = minOf{it.y}
+
+enum class Direction(val vector: Vector) {
+    North(Vector(0, -1)),
+    East(Vector(1, 0)),
+    South(Vector(0, 1)),
+    West(Vector(-1, 0));
+    
+    fun forwardDirections() = when (this) {
+        North -> setOf(North, East, West)
+        East ->  setOf(East, North, South)
+        South ->  setOf(South, East, West)
+        West ->  setOf(West, South, North)
+    }
+}
