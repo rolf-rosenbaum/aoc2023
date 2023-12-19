@@ -3,6 +3,7 @@ import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 
 typealias Vector = Point
@@ -57,6 +58,12 @@ data class Point(val x: Int, val y: Int) {
     fun distanceTo(other: Point) = abs(x - other.x) + abs(y - other.y)
     operator fun plus(other: Point) = Point(x + other.x, y + other.y)
     operator fun minus(other: Point) = Point(other.x -x, other.y - y)
+    fun move(direction: Direction, distance: Int): Point = when(direction) {
+        Direction.North -> copy(x, y-distance)
+        Direction.East -> copy(x+distance, y)
+        Direction.South -> copy(x, y+distance)
+        Direction.West -> copy(x-distance, y)
+    }
 }
 
 fun IntRange.fullyContains(other: IntRange) =
@@ -110,4 +117,31 @@ enum class Direction(val vector: Vector) {
         South ->  setOf(South, East, West)
         West ->  setOf(West, South, North)
     }
+}
+
+fun Iterable<Point>.polygonArea(includingPerimeter: Boolean = true): Long {
+    val iter = iterator()
+    val start = iter.next()
+    var perimeter = 0L
+    var sum = 0L
+    var last = start
+
+    fun continueLace(from: Point, to: Point) {
+        perimeter += from.distanceTo(to)
+        sum += from.x.toLong() * to.y.toLong()
+        sum -= from.y.toLong() * to.x.toLong()
+    }
+
+    while(iter.hasNext()) {
+        val next = iter.next()
+        continueLace(last, next)
+        last = next
+    }
+
+    continueLace(last, start)
+
+    val insideArea = sum.absoluteValue / 2
+
+    return if (includingPerimeter) insideArea - perimeter / 2 + 1 + perimeter
+    else insideArea
 }
