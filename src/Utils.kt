@@ -77,6 +77,9 @@ fun IntRange.union(other: IntRange): IntRange? {
         IntRange(minOf(first, other.first), maxOf(last, other.last))
     else null
 }
+fun IntRange.merge(other: IntRange): IntRange {
+    return IntRange(maxOf(first, other.first), minOf(last, other.last)).let {if (it.first >= it.last) 0..0 else it}
+}
 
 fun List<Int>.findPattern(minWindow: Int = 1, startIndex: Int = 1): Pair<Int, Int> {
     (startIndex..size / 2).forEach { windowSize ->

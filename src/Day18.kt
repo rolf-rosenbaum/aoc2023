@@ -12,7 +12,7 @@ fun main() {
             current = current.move(step.direction, step.numberOfSteps)
             trench.add(current)
         }
-        return trench.polygonArea()
+        return trench.polygonArea(true)
     }
 
     fun part1(input: List<String>): Long {
